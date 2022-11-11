@@ -1,8 +1,10 @@
 using Dadata;
-
 using System.Security.Authentication;
 
+// Кол-во запросов к сервису DaData Api в день
 int count_requests = 0;
+
+// Текущая дата
 DateTime currentDate = DateTime.Now;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,8 +32,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-app.MapGet("/", () => "../suggest_address/{address} - для поиска адреса.");
 
 app.MapGet("/count", () =>
 {
@@ -72,7 +72,8 @@ app.Run();
 
 public class SuggestionRequest
 {
+	/// <summary>
+	/// Текст запроса
+	/// </summary>
 	public string Query { get; set; }
-
-	public string MyProperty { get; set; }
 }
