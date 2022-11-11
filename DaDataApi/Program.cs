@@ -14,6 +14,7 @@ builder.WebHost.UseKestrel(kestrelOptions =>
 	kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
 	{
 		httpsOptions.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
+		httpsOptions.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
 	});
 });
 
