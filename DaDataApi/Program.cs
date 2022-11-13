@@ -1,10 +1,10 @@
 using Dadata;
 using System.Security.Authentication;
 
-// Кол-во запросов к сервису DaData Api в день
+// РљРѕР»-РІРѕ Р·Р°РїСЂРѕСЃРѕРІ DaData Api РІ РґРµРЅСЊ
 int count_requests = 0;
 
-// Текущая дата
+// РўРµРєСѓС‰Р°СЏ РґР°С‚Р°
 DateTime currentDate = DateTime.Now;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+// РџРѕР»СѓС‡Р°РµС‚ РєРѕР»-РІРѕ Р·Р°РїСЂРѕСЃРѕРІ Рє СЃРµСЂРІРёСЃСѓ РЅР° С‚РµРєСѓС‰РёР№ РґРµРЅСЊ
 app.MapGet("/count", () =>
 {
 	app.Logger.LogDebug($"Get count requests ({count_requests})");
@@ -45,7 +45,7 @@ app.MapPost("/suggest_address", async (SuggestionRequest suggestion, IConfigurat
 	try
 	{
 		count_requests++;
-		app.Logger.LogInformation($"[{DateTime.Now}] [{count_requests}] Get request to DaData.Api ...");
+		app.Logger.LogInformation($"[{DateTime.Now}] [{count_requests}] Post request to DaData.Api ...");
 
 		var token = conf.GetSection("Token").Value;
 		var api = new SuggestClientAsync(token);
@@ -66,7 +66,7 @@ app.MapPost("/suggest_address", async (SuggestionRequest suggestion, IConfigurat
 		return Results.Problem(ex.Message);
 	}
 
-	return Results.NotFound("Не найдено.");
+	return Results.NotFound("ГЌГҐ Г­Г Г©Г¤ГҐГ­Г®.");
 });
 
 app.Run();
@@ -74,7 +74,7 @@ app.Run();
 public class SuggestionRequest
 {
 	/// <summary>
-	/// Текст запроса
+	/// РўРµРєСЃС‚ Р·Р°РїСЂРѕСЃР°
 	/// </summary>
 	public string Query { get; set; }
 }
